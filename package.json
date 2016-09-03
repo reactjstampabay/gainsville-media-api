@@ -1,0 +1,25 @@
+{
+  "name": "gainsville-media-api",
+  "version": "1.0.0",
+  "description": "The Gainsville Media API",
+  "main": "app.js",
+  "engines": {
+    "node": "6.4.0"
+  },
+  "scripts": {
+    "debug": "node debug app.js",
+    "start": "node app.js"
+  },
+  "author": "Eric Nograles",
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "^2.2.32",
+    "bluebird": "^3.1.1",
+    "firebase": "^3.3.0",
+    "gm": "^1.21.1",
+    "hapi": "^12.1.0",
+    "redis": "^2.4.2",
+    "uuid": "^2.0.1",
+    "winston": "^2.1.1"
+  }
+}
