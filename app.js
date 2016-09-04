@@ -28,7 +28,7 @@ server.route({
         return reply(response);
       })
       .catch(function(err) {
-        return reply(err).code(401);
+        return reply(err);
       });
   },
   config: {

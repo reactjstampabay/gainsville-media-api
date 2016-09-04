@@ -43,7 +43,7 @@ function upload(base64Image) {
             }
           });
         })
-        .catch(error => {
+        .catch(err => {
           return reject(err);
         });
     }
