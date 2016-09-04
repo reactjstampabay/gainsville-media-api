@@ -1,6 +1,7 @@
 'use strict';
 
 const Promise = require('bluebird');
+const firebase = require('firebase');
 const AWS = require('aws-sdk');
 
 module.exports = {
@@ -14,6 +15,10 @@ function initialize() {
       initializeAWS()
         .then(function(aws) {
           infrastructure.aws = aws;
+          return initializFirebase();
+        })
+        .then(function(firebase) {
+          infrastructure.firebase = firebase;
           resolve(infrastructure);
         })
         .catch(function(err) {
@@ -33,6 +38,23 @@ function initializeAWS() {
       });
 
       resolve(AWS);
+    }
+  );
+}
+
+function initializFirebase() {
+  return new Promise(
+    (resolve, reject) => {
+      const config = {
+        serviceAccount: {
+          projectId: process.env.FIREBASE_PROJECT_ID,
+          clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+          privateKey: process.env.FIREBASE_PRIVATE_KEY
+        },
+        databaseURL: process.env.FIREBASE_DATABASE_URL
+      };
+      firebase.initializeApp(config);
+      resolve(firebase);
     }
   );
 }

@@ -44,7 +44,7 @@ function upload(base64Image) {
           });
         })
         .catch(err => {
-          return reject(err);
+          return reject({responseCode: 500, error: JSON.stringify(err)});
         });
     }
   );

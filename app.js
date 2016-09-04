@@ -23,12 +23,15 @@ server.route({
   path: '/media/upload',
   handler: function(request, reply) {
     // Validate the jwt and upload the photo
-    AWSService.upload(request.payload.media)
+    AuthService.validate(request.headers.authentication.replace('Bearer ', ''))
+      .then(result => {
+        return AWSService.upload(request.payload.media);
+      })
       .then(function(response) {
         return reply(response);
       })
       .catch(function(err) {
-        return reply(err);
+        return reply(err).code(err.responseCode);
       });
   },
   config: {
